@@ -26,3 +26,33 @@ C = [ 0  1  0  0;   % 출력 1: yaw rate r
 
 % D 행렬
 D = zeros(2, 2);
+%% 입력–출력 설정 및 Transfer Function 도출
+% 상태공간 시스템 생성
+sys = ss(A, B, C, D);
+
+% 이름 달아두기
+sys.StateName  = {'\beta', 'r', 'p', '\phi'};
+sys.InputName  = {'\delta_r', '\delta_a'};
+sys.OutputName = {'r', '\phi'};
+
+% 2x2 전달함수 행렬 G(s) = C (sI - A)^(-1) B
+G = tf(sys);
+
+% 채널별 SISO 전달함수 분리
+% G11(s) = r(s)/delta_r(s)
+% G12(s) = r(s)/delta_a(s)
+% G21(s) = phi(s)/delta_r(s)
+% G22(s) = phi(s)/delta_a(s)
+G11 = G(1,1);   % delta_r -> r
+G12 = G(1,2);   % delta_a -> r
+G21 = G(2,1);   % delta_r -> phi
+G22 = G(2,2);   % delta_a -> phi
+
+% Transfer Function 출력
+%disp('=== Transfer function matrix G(s) ===');
+%G
+
+%disp('G11(s) = r / delta_r');  G11
+%disp('G12(s) = r / delta_a');  G12
+%disp('G21(s) = phi / delta_r');G21
+%disp('G22(s) = phi / delta_a');G22
