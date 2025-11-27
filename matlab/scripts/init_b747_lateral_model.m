@@ -26,6 +26,7 @@ C = [ 0  1  0  0;   % 출력 1: yaw rate r
 
 % D 행렬
 D = zeros(2, 2);
+
 %% 입력–출력 설정 및 Transfer Function 도출
 % 상태공간 시스템 생성
 sys = ss(A, B, C, D);
@@ -56,3 +57,6 @@ G22 = G(2,2);   % delta_a -> phi
 %disp('G12(s) = r / delta_a');  G12
 %disp('G21(s) = phi / delta_r');G21
 %disp('G22(s) = phi / delta_a');G22
+
+%% Simulation 시간 설정
+T_end = 800;

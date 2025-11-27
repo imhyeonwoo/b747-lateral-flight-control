@@ -1,23 +1,6 @@
 %% open_loop_step_responses.m
 % Simulink 결과(out 구조체)를 이용한 B-747 lateral step responses 플롯
 
-%% 0. Sim 결과 확인
-if ~exist('out','var')
-    error('작업공간에 ''out'' 변수가 없습니다. 먼저 Simulink 모델을 시뮬레이션 하세요.');
-end
-
-if ~isa(out, 'Simulink.SimulationOutput')
-    error('out 변수가 Simulink.SimulationOutput 타입이 아닙니다.');
-end
-
-names = out.who;   % SimulationOutput 안에 저장된 변수 이름(cell array)
-
-if ~ismember('rudder_step_out',  names) || ...
-   ~ismember('aileron_step_out', names)
-    error(['out.rudder_step_out / out.aileron_step_out 이 없습니다. ', ...
-           'To Workspace 블록 이름 또는 저장 형식을 확인하세요.']);
-end
-
 %% 1. Rudder step: [delta_r step, delta_a = 0] -> [r, phi]
 
 ts_rudder = out.rudder_step_out;     % timeseries 객체
