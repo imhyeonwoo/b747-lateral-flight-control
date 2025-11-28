@@ -4,7 +4,8 @@
 s = tf('s');
 
 % 루트 궤적으로 잡은 최종 파라미터 (나중에 값만 바꿔 쓰면 됨)
-K_r = 0.8;   z_r = 0.05;  p_r = 0.7;   % rudder → yaw loop
+% K_r = 0.8;   z_r = 0.05;  p_r = 0.7;   % rudder → yaw loop
+K_r = 1.0; z_r = 0.1; p_r = 1.0;
 K_a = 0.6;   z_a = 0.02;  p_a = 0.4;   % aileron → bank loop
 
 % 보상기 "형태" (gain 제외) : C_r(s) = (s+z_r)/(s+p_r), C_a(s) = (s+z_a)/(s+p_a)
@@ -172,3 +173,30 @@ ylabel('Yaw rate r [deg/s]');
 legend('Open-loop (Simulink)', 'With compensator (Simulink)', ...
        'Location','best');
 title('Rudder 3-2-1-1 input: \delta_r 3-2-1-1 \rightarrow r (Simulink 결과)');
+
+%% 4.3.4 Rudder doublet 응답 비교
+
+ts_rud_doublet_open = out_o.rudder_doublet_out; % [r, phi] (deg 단위)
+ts_rud_doublet_comp = out_c.rudder_doublet_comp_out;
+
+% 시간 벡터
+t_rud_doublet_open = ts_rud_doublet_open.Time;
+t_rud_doublet_comp = ts_rud_doublet_comp.Time;
+
+% 데이터 (1열: yaw rate r, 2열: bank angle phi)
+r_rud_doublet_open = ts_rud_doublet_open.Data(:,1); % [deg/s]
+r_rud_doublet_comp = ts_rud_doublet_comp.Data(:,1);
+
+% 필요하면 phi도 같이 보고 싶을 때 사용
+% phi_rud_doublet_open = ts_rud_doublet_open.Data(:,2); % [deg]
+% phi_rud_doublet_comp = ts_rud_doublet_comp.Data(:,2);
+
+figure('Name','Rudder doublet (Simulink)','NumberTitle','off');
+plot(t_rud_doublet_open, r_rud_doublet_open, 'LineWidth',1.5); hold on;
+plot(t_rud_doublet_comp, r_rud_doublet_comp, 'LineWidth',1.5);
+grid on;
+xlabel('Time [s]');
+ylabel('Yaw rate r [deg/s]');
+legend('Open-loop (Simulink)', 'With compensator (Simulink)', ...
+'Location','best');
+title('Rudder doublet input: \delta_r doublet \rightarrow r (Simulink 결과)');
