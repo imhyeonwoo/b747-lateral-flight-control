@@ -4,7 +4,7 @@
 % - input: u = [delta_r; delta_a]
 % - output: y = [r; phi]
 
-clear; clc;
+% clear; clc;
 
 %% 상태공간 행렬 정의
 
