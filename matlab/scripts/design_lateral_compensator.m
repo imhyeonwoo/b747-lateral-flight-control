@@ -172,3 +172,56 @@ ylabel('Yaw rate r [deg/s]');
 legend('Open-loop (Simulink)', 'With compensator (Simulink)', ...
        'Location','best');
 title('Rudder 3-2-1-1 input: \delta_r 3-2-1-1 \rightarrow r (Simulink 결과)');
+
+%% 4.3.4 Coupling responses under 3-2-1-1 input
+%  - δ_r 3-2-1-1 → φ (rudder → bank angle)
+%  - δ_a 3-2-1-1 → r (aileron → yaw rate)
+
+%% (1) δ_r 3-2-1-1 입력에 대한 bank angle φ 응답 비교 (G21 채널)
+
+% Simulink 결과 불러오기 (deg 단위, [r, phi])
+ts_rud_3211_open = out_o.rudder_3211_out;         % uncompensated
+ts_rud_3211_comp = out_c.rudder_3211_comp_out;    % compensated
+
+% 시간 벡터
+t_rud_3211_open = ts_rud_3211_open.Time;
+t_rud_3211_comp = ts_rud_3211_comp.Time;
+
+% 데이터 (1열: yaw rate r [deg/s], 2열: bank angle phi [deg])
+phi_rud_3211_open = ts_rud_3211_open.Data(:,2);   % [deg]
+phi_rud_3211_comp = ts_rud_3211_comp.Data(:,2);   % [deg]
+
+figure('Name','Rudder 3-2-1-1 → phi (Simulink)','NumberTitle','off');
+plot(t_rud_3211_open, phi_rud_3211_open, 'LineWidth',1.5); hold on;
+plot(t_rud_3211_comp, phi_rud_3211_comp, 'LineWidth',1.5);
+grid on;
+xlabel('Time [s]');
+ylabel('Bank angle \phi [deg]');
+legend('Uncompensated (Simulink)', 'With compensator (Simulink)', ...
+       'Location','best');
+title('Rudder 3-2-1-1 input: \delta_r 3-2-1-1 \rightarrow \phi (Simulink 결과)');
+
+
+%% (2) δ_a 3-2-1-1 입력에 대한 yaw rate r 응답 비교 (G12 채널)
+
+% Simulink 결과 불러오기 (deg 단위, [r, phi])
+ts_ail_3211_open = out_o.aileron_3211_out;         % uncompensated
+ts_ail_3211_comp = out_c.aileron_3211_comp_out;    % compensated
+
+% 시간 벡터
+t_ail_3211_open = ts_ail_3211_open.Time;
+t_ail_3211_comp = ts_ail_3211_comp.Time;
+
+% 데이터 (1열: yaw rate r [deg/s], 2열: bank angle phi [deg])
+r_ail_3211_open = ts_ail_3211_open.Data(:,1);      % [deg/s]
+r_ail_3211_comp = ts_ail_3211_comp.Data(:,1);      % [deg/s]
+
+figure('Name','Aileron 3-2-1-1 → r (Simulink)','NumberTitle','off');
+plot(t_ail_3211_open, r_ail_3211_open, 'LineWidth',1.5); hold on;
+plot(t_ail_3211_comp, r_ail_3211_comp, 'LineWidth',1.5);
+grid on;
+xlabel('Time [s]');
+ylabel('Yaw rate r [deg/s]');
+legend('Uncompensated (Simulink)', 'With compensator (Simulink)', ...
+       'Location','best');
+title('Aileron 3-2-1-1 input: \delta_a 3-2-1-1 \rightarrow r (Simulink 결과)');
