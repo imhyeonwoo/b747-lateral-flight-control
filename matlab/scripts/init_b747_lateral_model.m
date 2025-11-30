@@ -4,8 +4,6 @@
 % - input: u = [delta_r; delta_a]
 % - output: y = [r; phi]
 
-% clear; clc;
-
 %% 상태공간 행렬 정의
 
 % A 행렬
@@ -59,4 +57,5 @@ G22 = G(2,2);   % delta_a -> phi
 %disp('G22(s) = phi / delta_a');G22
 
 %% Simulation 시간 설정
-T_end = 800;
+T_end = 100;
+
