@@ -21,15 +21,20 @@ $$
 \dot{x} = A x + B u,\qquad y = Cx + Du
 $$
 
-- 상태벡터:  
+- 상태벡터:
+
 $$
 x = \begin{bmatrix}\beta & r & p & \phi\end{bmatrix}^T
 $$
-- 입력:  
+
+- 입력:
+  
 $$
 u = \begin{bmatrix}\delta_r & \delta_a\end{bmatrix}^T
 $$
-- 출력:  
+
+- 출력:
+  
 $$
 y = \begin{bmatrix}r & \phi\end{bmatrix}^T
 $$
@@ -44,19 +49,22 @@ $$
 SISO 루프에서 lead/lag 보상기를 튜닝하고, yaw damper에 **wash-out filter**를 적용했습니다.
 
 - 보상기(개념):
+  
 $$
 C(s)=K\frac{s+z}{s+p}\quad (\text{lead/lag})
 $$
 
 - Wash-out filter(개념):
+
 $$
 W(s)=\frac{s}{s+\omega_w}
 \quad\left(\omega_w=\frac{1}{T_w}\right)
 $$
+
 저주파(지속 선회) 성분은 억제하고, 필요한 감쇠 성분만 통과시키는 용도로 사용합니다.
 
 <p align="center">
-  <img src="docs/washout_block_diagram.png" alt="Wash-out filter block diagram" width="780">
+  <img src="docs/washout_block_diagram.png" alt="Wash-out filter block diagram" width="380">
 </p>
 
 
@@ -66,17 +74,19 @@ $$
 동일 플랜트에 대해 LQR 기반 상태피드백을 설계하여 성능을 비교했습니다.
 
 - 제어법칙:
+  
 $$
 u = -Kx
 $$
 
 - 비용함수:
+  
 $$
 J=\int_0^\infty \left(x^TQx + u^TRu\right)\,dt
 $$
 
 <p align="center">
-  <img src="docs/Simulink%20Implementation%20of%20LQR%20State%20Feedback%20Controller.png" alt="Simulink implementation of LQR state feedback controller" width="780">
+  <img src="docs/Simulink%20Implementation%20of%20LQR%20State%20Feedback%20Controller.png" alt="Simulink implementation of LQR state feedback controller" width="570">
 </p>
 
 ---
@@ -85,7 +95,7 @@ $$
 
 ### Rudder doublet response (비교)
 <p align="center">
-  <img src="results/lqr/Rudder%20Doublet%20Response.png" alt="Rudder Doublet Response" width="780">
+  <img src="results/lqr/Rudder%20Doublet%20Response.png" alt="Rudder Doublet Response" width="500">
 </p>
 
 ---
@@ -110,4 +120,5 @@ $$
 ## 참고
 - MathWorks (Yaw Damper Design for a 747 Jet Aircraft)  
   https://kr.mathworks.com/help/control/ug/yaw-damper-design-for-a-747-jet-aircraft.html
+
 

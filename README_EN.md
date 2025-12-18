@@ -22,15 +22,18 @@ $$
 \dot{x} = A x + B u,\qquad y = Cx + Du
 $$
 
-- State vector (example):  
+- State vector (example):
+  
 $$
 x = \begin{bmatrix}\beta & r & p & \phi\end{bmatrix}^T
 $$
-- Input (example):  
+- Input (example):
+  
 $$
 u = \begin{bmatrix}\delta_r & \delta_a\end{bmatrix}^T
 $$
-- Output (example):  
+- Output (example):
+  
 $$
 y = \begin{bmatrix}r & \phi\end{bmatrix}^T
 $$
@@ -45,19 +48,22 @@ $$
 A lead/lag compensator was tuned in a SISO loop, and a **wash-out filter** was applied to the yaw damper.
 
 - Compensator (concept):
+  
 $$
 C(s)=K\frac{s+z}{s+p}\quad (\text{lead/lag})
 $$
 
 - Wash-out filter (concept):
+  
 $$
 W(s)=\frac{s}{s+\omega_w}
 \quad\left(\omega_w=\frac{1}{T_w}\right)
 $$
+
 It is used to attenuate low-frequency (steady-turn) components while passing the damping-related components needed for stability.
 
 <p align="center">
-  <img src="docs/washout_block_diagram.png" alt="Wash-out filter block diagram" width="780">
+  <img src="docs/washout_block_diagram.png" alt="Wash-out filter block diagram" width="380">
 </p>
 
 ---
@@ -66,17 +72,19 @@ It is used to attenuate low-frequency (steady-turn) components while passing the
 For the same plant, an LQR-based state-feedback controller was designed to compare performance.
 
 - Control law:
+  
 $$
 u = -Kx
 $$
 
 - Cost function:
+  
 $$
 J=\int_0^\infty \left(x^TQx + u^TRu\right)\,dt
 $$
 
 <p align="center">
-  <img src="docs/Simulink%20Implementation%20of%20LQR%20State%20Feedback%20Controller.png" alt="Simulink implementation of LQR state feedback controller" width="780">
+  <img src="docs/Simulink%20Implementation%20of%20LQR%20State%20Feedback%20Controller.png" alt="Simulink implementation of LQR state feedback controller" width="570">
 </p>
 
 ---
@@ -85,7 +93,7 @@ $$
 
 ### Rudder doublet response (comparison)
 <p align="center">
-  <img src="results/lqr/Rudder%20Doublet%20Response.png" alt="Rudder Doublet Response" width="780">
+  <img src="results/lqr/Rudder%20Doublet%20Response.png" alt="Rudder Doublet Response" width="500">
 </p>
 
 ---
